@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mandy Fashion - Wrap Yourself in History with Batik</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+    
+    :root {
+      --primary: #6A0DAD;
+      --secondary: #FFA500;
+      --accent: #E83E8C;
+      --dark: #2A2438;
+      --light: #F8F9FA;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--dark);
+    }
+    
+    h1, h2, h3, h4, h5 {
+      font-family: 'Cormorant Garamond', serif;
+    }
+    
+    .hero-pattern {
+      background-color: #f3e5f5;
+      background-image: radial-gradient(#6A0DAD 0.5px, transparent 0.5px), radial-gradient(#6A0DAD 0.5px, #f3e5f5 0.5px);
+      background-size: 20px 20px;
+      background-position: 0 0, 10px 10px;
+    }
+    
+    .batik-pattern {
+      background-color: rgba(255, 165, 0, 0.1);
+      background-image: 
+        repeating-linear-gradient(45deg, rgba(106, 13, 173, 0.1) 0, rgba(106, 13, 173, 0.1) 2px, transparent 0, transparent 8px),
+        repeating-linear-gradient(-45deg, rgba(232, 62, 140, 0.1) 0, rgba(232, 62, 140, 0.1) 2px, transparent 0, transparent 8px);
+    }
+    
+    .peacock-gradient {
+      background: linear-gradient(135deg, #6A0DAD, #4169E1, #E83E8C);
+    }
+    
+    .navbar-link {
+      position: relative;
+    }
+    
+    .navbar-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--secondary);
+      transition: width 0.3s ease;
+    }
+    
+    .navbar-link:hover::after {
+      width: 100%;
+    }
+    
+    .product-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .batik-card {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .batik-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(
+        transparent 340deg,
+        rgba(106, 13, 173, 0.2) 360deg
+      );
+      animation: rotate 10s linear infinite;
+      z-index: -1;
+    }
+    
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    
+    .peacock-icon {
+      display: inline-block;
+      position: relative;
+    }
+    
+    .testimonial-card {
+      transition: transform 0.3s ease;
+    }
+    
+    .testimonial-card:hover {
+      transform: scale(1.05);
+    }
+    
+    .wave-divider {
+      position: relative;
+      height: 50px;
+      overflow: hidden;
+    }
+    
+    .wave-divider::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 10px;
+      background: linear-gradient(45deg, transparent, transparent 49%, var(--secondary) 49%, var(--secondary) 51%, transparent 51%, transparent);
+      background-size: 20px 20px;
+    }
+
+    /* Custom animation classes */
+    .hover-scale {
+      transition: transform 0.3s ease;
+    }
+    
+    .hover-scale:hover {
+      transform: scale(1.05);
+    }
+
+    .svg-container {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <div class="flex items-center">
+        <div class="text-3xl font-bold text-purple-800">
+          <span class="text-orange-500">M</span>andy <span class="text-orange-500">F</span>ashion
+        </div>
+      </div>
+      <div class="hidden md:flex space-x-8">
+        <a href="#home" class="navbar-link font-medium text-gray-800 hover:text-purple-800">Home</a>
+        <a href="#about" class="navbar-link font-medium text-gray-800 hover:text-purple-800">About</a>
+        <a href="#collections" class="navbar-link font-medium text-gray-800 hover:text-purple-800">Collections</a>
+        <a href="#process" class="navbar-link font-medium text-gray-800 hover:text-purple-800">Process</a>
+        <a href="#testimonials" class="navbar-link font-medium text-gray-800 hover:text-purple-800">Testimonials</a>
+        <a href="#contact" class="navbar-link font-medium text-gray-800 hover:text-purple-800">Contact</a>
+      </div>
+      <div class="md:hidden">
+        <button id="menu-toggle" class="text-gray-800 focus:outline-none">
+          <i class="fas fa-bars text-2xl"></i>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-inner">
+      <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
+        <a href="#home" class="py-2 text-gray-800 hover:text-purple-800">Home</a>
+        <a href="#about" class="py-2 text-gray-800 hover:text-purple-800">About</a>
+        <a href="#collections" class="py-2 text-gray-800 hover:text-purple-800">Collections</a>
+        <a href="#process" class="py-2 text-gray-800 hover:text-purple-800">Process</a>
+        <a href="#testimonials" class="py-2 text-gray-800 hover:text-purple-800">Testimonials</a>
+        <a href="#contact" class="py-2 text-gray-800 hover:text-purple-800">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero-pattern relative py-20 md:py-32">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row items-center">
+        <div class="w-full md:w-1/2 mb-10 md:mb-0">
+          <h1 class="text-4xl md:text-6xl font-bold mb-4 text-purple-900">Wrap Yourself in History with Batik</h1>
+          <p class="text-lg md:text-xl mb-8 text-gray-700">Celebrating Sri Lanka's ancient batik tradition with modern designs that honor our heritage while embracing contemporary style.</p>
+          <div class="flex space-x-4">
+            <a href="#collections" class="px-6 py-3 bg-purple-800 text-white rounded-full hover:bg-purple-900 transition duration-300 shadow-lg">
+              Explore Collections
+            </a>
+            <a href="#about" class="px-6 py-3 border-2 border-purple-800 text-purple-800 rounded-full hover:bg-purple-100 transition duration-300">
+              Our Story
+            </a>
+          </div>
+        </div>
+        <div class="w-full md:w-1/2 flex justify-center">
+          <div class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden peacock-gradient p-1">
+            <div class="w-full h-full bg-white rounded-full flex items-center justify-center">
+              <svg class="svg-container w-48 h-48" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#6A0DAD" d="M100,20 C120,20 140,35 145,60 C150,85 130,105 100,105 C70,105 50,85 55,60 C60,35 80,20 100,20 Z"></path>
+                <path fill="#FFA500" d="M100,105 C130,105 150,125 150,150 C150,175 130,190 100,190 C70,190 50,175 50,150 C50,125 70,105 100,105 Z"></path>
+                <path fill="#E83E8C" d="M100,70 L130,40 L140,50 L110,80 L100,70 Z"></path>
+                <path fill="#E83E8C" d="M100,70 L70,40 L60,50 L90,80 L100,70 Z"></path>
+                <circle cx="85" cy="60" r="5" fill="#FFA500"></circle>
+                <circle cx="115" cy="60" r="5" fill="#FFA500"></circle>
+                <path fill="none" stroke="#FFA500" stroke-width="2" d="M85,75 Q100,85 115,75"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100">
+        <path fill="#ffffff" fill-opacity="1" d="M0,32L48,48C96,64,192,96,288,96C384,96,480,64,576,64C672,64,768,96,864,96C960,96,1056,64,1152,48C1248,32,1344,32,1392,32L1440,32L1440,100L1392,100C1344,100,1248,100,1152,100C1056,100,960,100,864,100C768,100,672,100,576,100C480,100,384,100,288,100C192,100,96,100,48,100L0,100Z"></path>
+      </svg>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">A Vision Rooted in Craftsmanship</h2>
+        <div class="w-24 h-1 bg-orange-500 mx-auto"></div>
+      </div>
+      <div class="flex flex-col md:flex-row items-center">
+        <div class="w-full md:w-1/2 mb-10 md:mb-0">
+          <div class="batik-card rounded-lg p-8 bg-purple-50 hover-scale">
+            <h3 class="text-2xl font-semibold mb-4 text-purple-800">Our Story</h3>
+            <p class="mb-4 text-gray-700">Located in the heart of Ragama, Sri Lanka, Mandy Fashion is a boutique dedicated to celebrating heritage through handcrafted batik clothing.</p>
+            <p class="mb-4 text-gray-700">Each piece we create is thoughtfully designed to honor this tradition while adapting it to fit modern fashion sensibilities.</p>
+            <p class="text-gray-700">Whether it's a stunning saree, a flowing dress, or custom casual wear, we ensure that every garment is more than just clothing—it's a cultural statement.</p>
+          </div>
+        </div>
+        <div class="w-full md:w-1/2 pl-0 md:pl-10">
+          <div class="mb-8">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center mr-4">
+                <i class="fas fa-paint-brush text-purple-800 text-xl"></i>
+              </div>
+              <h3 class="text-xl font-semibold text-purple-800">Artful Tradition</h3>
+            </div>
+            <p class="text-gray-700 pl-16">Our designs preserve the intricate wax-resist dyeing method that transforms fabric into art, passed down through generations.</p>
+          </div>
+          <div class="mb-8">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center mr-4">
+                <i class="fas fa-feather-alt text-orange-500 text-xl"></i>
+              </div>
+              <h3 class="text-xl font-semibold text-orange-500">Peacock Symbolism</h3>
+            </div>
+            <p class="text-gray-700 pl-16">Our logo—a vividly feathered peacock beside "MF"—reflects beauty, pride, and the vibrant diversity of our batik patterns.</p>
+          </div>
+          <div>
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 rounded-full bg-pink-100 flex items-center justify-center mr-4">
+                <i class="fas fa-heart text-pink-500 text-xl"></i>
+              </div>
+              <h3 class="text-xl font-semibold text-pink-500">Community Connection</h3>
+            </div>
+            <p class="text-gray-700 pl-16">We're more than a fashion brand—we're a community-centered boutique offering personalized experiences that celebrate our shared heritage.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Collections Section -->
+  <section id="collections" class="py-16 batik-pattern">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">The Mandy Fashion Collection</h2>
+        <p class="text-lg text-gray-700 max-w-2xl mx-auto">Blending traditional dye techniques with modern silhouettes, our collections give you the opportunity to wear history proudly.</p>
+        <div class="w-24 h-1 bg-orange-500 mx-auto mt-4"></div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Collection Card 1 -->
+        <div class="product-card bg-white rounded-lg overflow-hidden shadow-lg">
+          <div class="h-64 bg-purple-800 flex items-center justify-center">
+            <svg class="w-32 h-32" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <path fill="#FFA500" d="M50,20 C60,20 70,30 70,40 C70,50 60,60 50,60 C40,60 30,50 30,40 C30,30 40,20 50,20 Z"></path>
+              <path fill="#FFFFFF" d="M50,30 C55,30 60,35 60,40 C60,45 55,50 50,50 C45,50 40,45 40,40 C40,35 45,30 50,30 Z"></path>
+              <path fill="#E83E8C" d="M50,60 C70,60 85,80 85,85 C85,90 70,95 50,95 C30,95 15,90 15,85 C15,80 30,60 50,60 Z"></path>
+            </svg>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2 text-purple-800">Elegant Sarees</h3>
+            <p class="text-gray-600 mb-4">Traditional batik patterns on flowing fabric, perfect for formal occasions and celebrations.</p>
+            <div class="flex justify-between items-center">
+              <span class="text-orange-500 font-semibold">Handcrafted</span>
+              <button class="px-4 py-2 bg-purple-800 text-white rounded-full hover:bg-purple-900 transition duration-300 text-sm">View Details</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Collection Card 2 -->
+        <div class="product-card bg-white rounded-lg overflow-hidden shadow-lg">
+          <div class="h-64 bg-pink-600 flex items-center justify-center">
+            <svg class="w-32 h-32" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <rect x="25" y="20" width="50" height="70" fill="#FFFFFF" />
+              <path fill="#6A0DAD" d="M25,20 C25,20 35,30 50,30 C65,30 75,20 75,20 L75,90 C75,90 65,80 50,80 C35,80 25,90 25,90 L25,20 Z"></path>
+              <circle cx="50" cy="50" r="10" fill="#FFA500" />
+            </svg>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2 text-purple-800">Modern Dresses</h3>
+            <p class="text-gray-600 mb-4">Contemporary silhouettes adorned with traditional batik patterns for everyday elegance.</p>
+            <div class="flex justify-between items-center">
+              <span class="text-orange-500 font-semibold">Fashion-forward</span>
+              <button class="px-4 py-2 bg-purple-800 text-white rounded-full hover:bg-purple-900 transition duration-300 text-sm">View Details</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Collection Card 3 -->
+        <div class="product-card bg-white rounded-lg overflow-hidden shadow-lg">
+          <div class="h-64 bg-blue-600 flex items-center justify-center">
+            <svg class="w-32 h-32" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <path fill="#FFA500" d="M30,20 L70,20 L70,80 L30,80 Z"></path>
+              <path fill="#6A0DAD" d="M35,25 L65,25 L65,75 L35,75 Z"></path>
+              <path fill="#FFFFFF" d="M40,30 L60,30 L60,70 L40,70 Z"></path>
+              <path fill="#E83E8C" d="M45,40 L55,40 L55,60 L45,60 Z"></path>
+            </svg>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2 text-purple-800">Casual Collection</h3>
+            <p class="text-gray-600 mb-4">Comfortable everyday wear featuring subtle batik accents and contemporary designs.</p>
+            <div class="flex justify-between items-center">
+              <span class="text-orange-500 font-semibold">Comfortable</span>
+              <button class="px-4 py-2 bg-purple-800 text-white rounded-full hover:bg-purple-900 transition duration-300 text-sm">View Details</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-10">
+        <a href="#" class="inline-block px-8 py-3 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition duration-300 shadow-lg">
+          View All Collections
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section id="process" class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">The Batik Process</h2>
+        <p class="text-lg text-gray-700 max-w-2xl mx-auto">Discover the ancient art of batik creation that makes each piece uniquely beautiful.</p>
+        <div class="w-24 h-1 bg-orange-500 mx-auto mt-4"></div>
+      </div>
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="w-full md:w-1/4 mb-10 md:mb-0 text-center">
+          <div class="rounded-full w-20 h-20 bg-purple-100 flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl font-bold text-purple-800">1</span>
+          </div>
+          <h3 class="text-xl font-bold mb-2 text-purple-800">Design</h3>
+          <p class="text-gray-600">Artists create unique patterns that blend tradition with modern aesthetics.</p>
+          <div class="h-20 hidden md:block">
+            <svg class="w-full h-full" viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0,10 C30,0 70,20 100,10" stroke="#FFA500" stroke-width="2" fill="none" stroke-dasharray="5,5" />
+              <polygon points="95,10 90,5 90,15" fill="#FFA500" />
+            </svg>
+          </div>
+        </div>
+        <div class="w-full md:w-1/4 mb-10 md:mb-0 text-center">
+          <div class="rounded-full w-20 h-20 bg-orange-100 flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl font-bold text-orange-500">2</span>
+          </div>
+          <h3 class="text-xl font-bold mb-2 text-orange-500">Wax Application</h3>
+          <p class="text-gray-600">Hot wax is applied to fabric in intricate patterns using traditional tools.</p>
+          <div class="h-20 hidden md:block">
+            <svg class="w-full h-full" viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0,10 C30,20 70,0 100,10" stroke="#6A0DAD" stroke-width="2" fill="none" stroke-dasharray="5,5" />
+              <polygon points="95,10 90,5 90,15" fill="#6A0DAD" />
+            </svg>
+          </div>
+        </div>
+        <div class="w-full md:w-1/4 mb-10 md:mb-0 text-center">
+          <div class="rounded-full w-20 h-20 bg-pink-100 flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl font-bold text-pink-500">3</span>
+          </div>
+          <h3 class="text-xl font-bold mb-2 text-pink-500">Dyeing</h3>
+          <p class="text-gray-600">Fabrics are immersed in vibrant dyes, with waxed areas resisting the color.</p>
+          <div class="h-20 hidden md:block">
+            <svg class="w-full h-full" viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0,10 C30,0 70,20 100,10" stroke="#E83E8C" stroke-width="2" fill="none" stroke-dasharray="5,5" />
+              <polygon points="95,10 90,5 90,15" fill="#E83E8C" />
+            </svg>
+          </div>
+        </div>
+        <div class="w-full md:w-1/4 text-center">
+          <div class="rounded-full w-20 h-20 bg-blue-100 flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl font-bold text-blue-600">4</span>
+          </div>
+          <h3 class="text-xl font-bold mb-2 text-blue-600">Finishing</h3>
+          <p class="text-gray-600">Wax is removed, fabric is washed, and garments are expertly crafted with care.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">What Our Customers Say</h2>
+        <div class="w-24 h-1 bg-orange-500 mx-auto"></div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Testimonial 1 -->
+        <div class="testimonial-card bg-white p-6 rounded-lg shadow-md">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center mr-4">
+              <span class="text-xl font-bold text-purple-800">A</span>
+            </div>
+            <div>
+              <h4 class="font-bold">Amara Silva</h4>
+              <p class="text-sm text-gray-500">Colombo</p>
+            </div>
+          </div>
+          <p class="text-gray-700">
+            "The saree I purchased from Mandy Fashion became an instant conversation starter at my sister's wedding. The colors are so vibrant, and the craftsmanship is exceptional."
+          </p>
+          <div class="mt-4 flex text-orange-500">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="testimonial-card bg-white p-6 rounded-lg shadow-md">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center mr-4">
+              <span class="text-xl font-bold text-orange-500">P</span>
+            </div>
+            <div>
+              <h4 class="font-bold">Priya Jayawardene</h4>
+              <p class="text-sm text-gray-500">Negombo</p>
+            </div>
+          </div>
+          <p class="text-gray-700">
+            "I love how Mandy Fashion blends traditional batik with modern styles. Their dresses are comfortable for daily wear but still make me feel connected to my cultural roots."
+          </p>
+          <div class="mt-4 flex text-orange-500">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="testimonial-card bg-white p-6 rounded-lg shadow-md">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 rounded-full bg-pink-100 flex items-center justify-center mr-4">
+              <span class="text-xl font-bold text-pink-500">T</span>
+            </div>
+            <div>
+              <h4 class="font-bold">Thilini Fernando</h4>
+              <p class="text-sm text-gray-500">Kandy</p>
+            </div>
+          </div>
+          <p class="text-gray-700">
+            "The personal attention I received at Mandy Fashion was incredible. They helped me find the perfect batik outfit that matches my style while honoring our beautiful traditions."
+          </p>
+          <div class="mt-4 flex text-orange-500">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 peacock-gradient">
+    <div
